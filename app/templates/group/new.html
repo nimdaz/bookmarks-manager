@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<p>NOTE: currently only parent groups are shown in the UI.</p>
+<form class="pure-form pure-form-stacked" method="post" novalidate>
+    <fieldset>
+        <legend>Create (sub)groups</legend>
+
+        <!-- <label for="group">Group</label> 
+        <select name="group">
+            <option value="0" selected> -- No Parent -- </option>
+            {% for group in groups %}
+            <option value="{{ group.id }}"> {{ group.name }} </option>
+            {% endfor %}
+        </select>-->
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="(Sub)groupname" autofocus />
+
+        <button type="submit" class="pure-button pure-button-primary">Create</button>
+    </fieldset>
+</form>
+
+</div>
+{% endblock %}

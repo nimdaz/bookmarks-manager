@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<p>NOTE: currently only parent groups are shown in the UI.</p>
+<form class="pure-form pure-form-stacked" method="post" novalidate>
+    <fieldset>
+        <legend>Edit (sub)groups</legend>
+        <p>NOTE: currently only parent groups are shown in the UI.</p>
+        <!-- <label for="group">Group</label>
+        <select name="group">
+            <option value="0"  {{'selected' if group.parent_id==0}}> -- No Parent -- </option>
+            {% for parent_group in groups %}
+            <option value="{{ parent_group.id }}" {{'selected' if group.parent_id==parent_group.id}}> {{ parent_group.name }} </option>
+            {% endfor %}
+        </select> -->
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="(Sub)groupname" value="{{ group.name }}" />
+
+        <button type="submit" class="pure-button pure-button-primary">Save</button>
+        <a class="pure-button button-error" href="{{ url_for('delete_group', id=group.id)}}"
+            onclick="return confirm('Delete group?')">Delete</a>
+    </fieldset>
+</form>
+
+</div>
+
+
+
+
+{% endblock %}

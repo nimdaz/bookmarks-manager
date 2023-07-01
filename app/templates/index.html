@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="pure-g">
+    <div class="pure-u-1-5 ">
+        <p><a class="pure-button pure-button-primary" href="{{ url_for('index') }}">Bookmarks manager</a></p>
+    </div>
+</div>
+<div class="pure-g">
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>Group</th>
+                <th><a class="pure-button" href="{{ url_for('new_group') }}">Add</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for group in groups %}
+            <tr>
+                <td><a href="{{ url_for('group', id=group.id)}}">{{ group.name }}</a></td>
+                <td><button class="pure-button" onclick="groups[{{ group.id }}].forEach(open_url)">Open</button></td>
+            </tr>
+            <br>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    const groups = {
+        {% for group in groups %}
+        {{ group.id }}: [{% for bookmark in group.bookmarks %}"{{ bookmark.formatted_url }}", {% endfor %}], 
+        {% endfor %}
+    }
+</script>
+{% endblock %}

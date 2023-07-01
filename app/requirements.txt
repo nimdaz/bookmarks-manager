@@ -1,0 +1,7 @@
+Flask==2.3.*
+Flask-SQLAlchemy==3.0.*
+
+# optional for development
+sqlite-web
+black
+flake8

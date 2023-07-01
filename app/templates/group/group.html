@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="pure-g">
+    <div class="pure-u-1-5 ">
+        <p><a class="pure-button pure-button-primary" href="{{ url_for('index') }}">Bookmarks manager</a></p>
+    </div>
+</div>
+<div class="pure-g">
+    <table id="bookmarks_table" class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th><a href="{{ url_for('edit_group', id=group.id) }}">{{ group.name }}</a></th>
+                <th>
+                    <button class="pure-button" onclick="bookmark_urls.forEach(open_url)">Open</button>
+                    <a class="pure-button" href="{{ url_for('new_bookmark') }}/{{ group.id }}">+ Bookmark</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bookmark in group.bookmarks %}
+            <tr>
+                <td><a href="{{ url_for('edit_bookmark', id=bookmark.id) }}">{{ bookmark.title }}</a></td>
+                <td>
+                    <a class="pure-button" href="{{ bookmark.formatted_url }}" target="_blank">Open</a>
+                    <a class="pure-button" href="{{ url_for('delete_bookmark', id=bookmark.id) }}"
+                        onclick="return confirm('Delete bookmark?')">Delete</a>
+                </td>
+            </tr>
+            <br>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    const bookmark_urls = [{% for bookmark in group.bookmarks %}"{{ bookmark.formatted_url }}", {% endfor %}]
+</script>
+{% endblock %}
